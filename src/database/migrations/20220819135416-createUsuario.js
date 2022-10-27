@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    return queryInterface.createTable('usuarios', {
+  async up(queryInterface, Sequelize) {
+    return queryInterface.createTable("usuarios", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,7 +10,14 @@ module.exports = {
         allowNull: false,
       },
       especialidadesId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
+        references:{
+          model:{
+            tableName: 'especialidades',
+          },
+          key: 'id',
+        },
+        allowNull: false,
       },
       nome: {
         type: Sequelize.STRING,
@@ -33,25 +40,25 @@ module.exports = {
         allowNull: false,
       },
       cpf: {
-        type : Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       telefone: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      dataNascimento:{
+      dataNascimento: {
         allowNull: false,
-        type:Sequelize.DATE,
+        type: Sequelize.DATE,
       },
-      avatar:{
+      avatar: {
         type: Sequelize.STRING,
       },
       receberSMS: {
-        type:Sequelize.TINYINT,
+        type: Sequelize.TINYINT,
       },
       receberEmail: {
-        type:Sequelize.TINYINT,
+        type: Sequelize.TINYINT,
       },
       criadoEm: {
         type: Sequelize.DATE,
@@ -59,10 +66,10 @@ module.exports = {
       atualizadoEm: {
         type: Sequelize.DATE,
       },
-    })
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-    return queryInterface.dropTable('usuarios');
-  }
+  async down(queryInterface, Sequelize) {
+    return queryInterface.dropTable("usuarios");
+  },
 };
